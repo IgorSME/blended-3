@@ -26,6 +26,11 @@ const userSchema = new Schema(
       default: [],
       ref: "contact",
     },
+    userNote: {
+      type: Array,
+      default: [],
+      ref: "note",
+    },
   },
   { versionKey: false, timestamps: true }
 );

@@ -13,11 +13,17 @@ const authToken = async (req, res, next) => {
       throw new Unauthorized("Not authorized");
     }
     const { id } = jwt.verify(token, SECRET_KEY);
-    const user = await User.findById(id).populate("userContacts", {
-      name: true,
-      email: true,
-      phone: true,
-    });
+    const user = await User.findById(id)
+      .populate("userContacts", {
+        name: true,
+        email: true,
+        phone: true,
+      })
+      .populate("userNote", {
+        title: true,
+        body: true,
+        contact: true,
+      });
     if (!user || !user.token) {
       throw new Unauthorized("Not authorized");
     }
