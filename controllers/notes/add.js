@@ -2,7 +2,9 @@ const { User, Note } = require("../../models");
 
 const add = async (req, res) => {
   const { _id } = req.user;
-  const note = await Note.create({ ...req.body, owner: _id });
+
+  const data = req.file ? { ...req.body, imageNote: req.file.path } : req.body;
+  const note = await Note.create({ ...data, owner: _id });
   if (note) {
     const user = await User.findByIdAndUpdate(_id, {
       $push: { userNote: note._id },

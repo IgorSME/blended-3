@@ -19,6 +19,10 @@ const noteSchema = new Schema({
     ref: "user",
     require: true,
   },
+  imageNote: {
+    type: String,
+    default: "",
+  },
 });
 
 const Note = model("note", noteSchema);
